@@ -7,7 +7,7 @@ class DogsController < ApplicationController
     else
       begin
         token = header.split(' ')[1] # split header and take second array element
-        secret = 'LitTerally AnyThing'
+        secret = Rails.application.secret_key_base
         payload = JWT.decode(token, secret)[0] # have to grab the first element of the array returned
 
         @user = User.find(payload['user_id']) # payload keys are strings
